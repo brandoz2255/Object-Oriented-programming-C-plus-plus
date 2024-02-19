@@ -8,12 +8,12 @@ int main(){
     int x = 0;
     int y = 5;
 
-    if (x < y){
+   // The for loop will continue to execute as long as x is less than y
+    for (; x < y; x +=  3) { // Note that the initialization is left empty
+        printf("%i\n", x); // Print the current value of x
+    }
 
-        printf("%i\n", x);
-        x +=  3; // Increment x by  3
-
-    }else if (x % 2 == 0){
+    if (x % 2 == 0){
         printf("x is even: %i\n",x);
 
     }else {
