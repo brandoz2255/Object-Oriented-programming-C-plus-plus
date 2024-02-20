@@ -29,7 +29,7 @@ int sumOfThree(int x, int y, int z){
 
 //function here 
 
-double division(int x , int y){
+double division(double x , double y){
 
     double answerDiv = x/y;
 
@@ -51,7 +51,7 @@ bool isGreaterThan(double x , int y){
 
 
     if (x > y){
-        cout << x <<"is greater than" << y << "\n"<< endl;
+        cout << x <<" is greater than " << y << "\n"<< endl;
         return true;
     }else{
         cout << x << "x is less than or equal to" << y << "\n" << endl;
