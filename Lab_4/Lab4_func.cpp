@@ -70,7 +70,7 @@ bool isGreaterThan(double x , int y){
  * return string
  */
 
-string select(const std::string& func_type) {
+string select(string func_type) {
     if (func_type == "sum") {
         return "the sum is ";
     } else if (func_type == "division") {
