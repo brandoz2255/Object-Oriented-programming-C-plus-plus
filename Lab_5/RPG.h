@@ -8,6 +8,7 @@
 
 
 
+
 using namespace std;
 
 
@@ -22,24 +23,25 @@ private:
     int health; 
     int defense;
     string type; 
-    array<string, SKILL_SIZE> skills;
+    // array<string, SKILL_SIZE> skills;
     int strength; 
     
 
 
 public:
 
+    array<string, SKILL_SIZE> skills;
 
     //constructors
     RPG();
     RPG(string name, int health ,int defense, string type, int strength);
 
-    
+    std::array<std::string, SKILL_SIZE> getSkills() const;
     void setSkills();
     void updateHealth(int);
     void printAction(string, RPG);
     void attack(RPG*);
-    void useSkill(RPG*);
+    void useSkill(int skillIndex, RPG* target);
     bool isAlive() const;
     string getName() const;
     int getHealth() const;
