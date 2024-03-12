@@ -18,15 +18,18 @@ int main() {
     player.setSkills();
     enemy.setSkills();
 
+    // Print initial stats
+    cout << "Player stats: Name: " << player.getName() << ", Health: " << player.getHealth() << ", Strength: " << player.getStrength() << ", Defense: " << player.getDefense() << endl;
+    cout << "Enemy stats: Name: " << enemy.getName() << ", Health: " << enemy.getHealth() << ", Strength: " << enemy.getStrength() << ", Defense: " << enemy.getDefense() << endl;
+
     // Variable to keep track of whose turn it is
     bool playerTurn = true;
 
     // Game loop
     while (player.isAlive() && enemy.isAlive()) {
-        printDottedLine();
-
         if (playerTurn) {
             // Player's turn
+            printDottedLine();
             cout << "Player's Turn:" << endl;
             // Display player's skills
             cout << "Choose a skill to use:" << endl;
@@ -41,16 +44,21 @@ int main() {
             // player.useSkill(choice - 1, &enemy); // Commented out as this function isn't implemented yet
         } else {
             // Enemy's turn
+            printDottedLine();
             cout << "Enemy's Turn:" << endl;
             // Randomly choose a skill for the enemy
             int enemyChoice = rand() % SKILL_SIZE;
             enemy.printAction(enemy.getSkills()[enemyChoice], player);
-            // enemy.useSkill(enemyChoice, &player); // Commented out as this function isn't implemented yet
+            player.updateHealth(player.getHealth() - enemy.getStrength()); // Enemy attacks player
         }
 
         // Switch turns
         playerTurn = !playerTurn;
     }
+
+    // Print final stats
+    cout << "Player stats: Name: " << player.getName() << ", Health: " << player.getHealth() << ", Strength: " << player.getStrength() << ", Defense: " << player.getDefense() << endl;
+    cout << "Enemy stats: Name: " << enemy.getName() << ", Health: " << enemy.getHealth() << ", Strength: " << enemy.getStrength() << ", Defense: " << enemy.getDefense() << endl;
 
     // Determine the winner
     if (player.isAlive()) {
