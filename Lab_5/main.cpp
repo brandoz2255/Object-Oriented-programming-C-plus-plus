@@ -9,6 +9,87 @@ void printDottedLine() {
     cout << "----------------------------------------" << endl;
 }
 
+
+/* @brief prints both players name and their health
+example output for names 
+ */
+void displayStats(const RPG& player, const RPG& enemy) {
+    cout << "Player stats: Name: " << player.getName() << ", Health: " << player.getHealth() << ", Strength: " << player.getStrength() << ", Defense: " << player.getDefense() << endl;
+    cout << "Enemy stats: Name: " << enemy.getName() << ", Health: " << enemy.getHealth() << ", Strength: " << enemy.getStrength() << ", Defense: " << enemy.getDefense() << endl;
+}
+
+
+void gameLoop(RPG& player, RPG& enemy) {
+    bool playerTurn = true;
+
+    while (player.isAlive() && enemy.isAlive()) {
+        if (playerTurn) {
+            printDottedLine();
+            cout << "Player's Turn:" << endl;
+            player.setSkills();
+
+            int choice;
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            player.printAction(player.getSkills()[choice - 1], enemy);
+            // Display stats after player's turn
+            displayStats(player, enemy);
+        } else {
+            printDottedLine();
+            cout << "Enemy's Turn:" << endl;
+            int enemyChoice = rand() % SKILL_SIZE;
+            enemy.printAction(enemy.getSkills()[enemyChoice], player);
+            player.updateHealth(player.getHealth() - enemy.getStrength());
+            // Display stats after enemy's turn
+            displayStats(player, enemy);
+        }
+
+        playerTurn = !playerTurn;
+    }
+}
+
+void displayEnd(bool playerAlive, const RPG& player, const RPG& enemy) {
+    if (playerAlive) {
+        cout << "Congratulations! You defeated the enemy!" << endl;
+    } else {
+        cout << "Game over! The enemy has defeated you." << endl;
+    }
+}
+
+
+
+
+
+
+int main() {
+    // Create two RPG characters
+    RPG player("Da Wiz", 100, 15, "mage", 20);
+    RPG enemy("Shrek", 80, 10, "Goblin", 15);
+
+    // Set skills for both characters
+    player.setSkills();
+    enemy.setSkills();
+
+    // Display initial stats
+    displayStats(player, enemy);
+
+    // Run the game loop
+    gameLoop(player, enemy);
+
+    // Display the final outcome
+    displayEnd(player.isAlive(), player, enemy);
+
+    // Display final stats
+    displayStats(player, enemy);
+
+    return 0;
+}
+
+
+
+
+/* 
 int main() {
     // Create two RPG characters
     RPG player("Da Wiz", 100, 15, "mage", 20);
@@ -41,7 +122,6 @@ int main() {
 
             // Perform skill usage
             player.printAction(player.getSkills()[choice - 1], enemy);
-            // player.useSkill(choice - 1, &enemy); // Commented out as this function isn't implemented yet
         } else {
             // Enemy's turn
             printDottedLine();
@@ -69,3 +149,4 @@ int main() {
 
     return 0;
 }
+ */
