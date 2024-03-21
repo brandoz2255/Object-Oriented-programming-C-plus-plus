@@ -41,7 +41,7 @@ public:
     void updateHealth(int);
     void printAction(string, RPG);
     void attack(RPG*);
-    void useSkill(int skillIndex, RPG* target);
+    void useSkill(int skillIndex, RPG* opponent);
     bool isAlive() const;
     string getName() const;
     int getHealth() const;

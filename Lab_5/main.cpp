@@ -19,6 +19,8 @@ void displayStats(const RPG& player, const RPG& enemy) {
 }
 
 
+
+
 void gameLoop(RPG& player, RPG& enemy) {
     bool playerTurn = true;
 
@@ -30,6 +32,14 @@ void gameLoop(RPG& player, RPG& enemy) {
 
             int choice;
             cout << "Enter your choice: ";
+            cin >> choice;
+
+            cout << "Available skills:" << endl;
+            for (int i = 0; i < SKILL_SIZE; ++i) {
+                cout << i + 1 << ". " << player.getSkills()[i] << endl; // Accessing skill names directly
+            }
+            cout << "Enter your choice (1 or 2): ";
+
             cin >> choice;
 
             player.printAction(player.getSkills()[choice - 1], enemy);
@@ -49,13 +59,29 @@ void gameLoop(RPG& player, RPG& enemy) {
     }
 }
 
-void displayEnd(bool playerAlive, const RPG& player, const RPG& enemy) {
-    if (playerAlive) {
+
+/**
+ * @brief displays who wins based on who is alive 
+ * use an if statement to check whether player1 is 
+ * alive if so print that they won else player 2
+ * 
+ * 
+ * Example Output:
+ * Da Wiz defeated Shrek: good game!\n
+ * 
+ * @param player 
+ * @param enemy
+ * 
+ */
+
+void displayEnd(const RPG& player, const RPG& enemy) {
+    if (player.isAlive()) {
         cout << "Congratulations! You defeated the enemy!" << endl;
     } else {
         cout << "Game over! The enemy has defeated you." << endl;
     }
 }
+
 
 
 
@@ -78,7 +104,7 @@ int main() {
     gameLoop(player, enemy);
 
     // Display the final outcome
-    displayEnd(player.isAlive(), player, enemy);
+    displayEnd(player, enemy);
 
     // Display final stats
     displayStats(player, enemy);
