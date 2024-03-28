@@ -16,7 +16,7 @@ using namespace std;
  * @param sample_size 
  */
 
-
+//writes to the file for the array of strings 
 void writeToFile_str(string filename, string* arr, int sample_size) {
     ofstream file(filename);
 
@@ -28,7 +28,7 @@ void writeToFile_str(string filename, string* arr, int sample_size) {
     printf("Wrote to %s\n", filename.c_str());
 }
 
-
+// writes to the file for the array of integers 
 void writeToFile_int(string filename, int* arr, int sample_size) {
     ofstream file(filename);
 
@@ -40,7 +40,7 @@ void writeToFile_int(string filename, int* arr, int sample_size) {
     printf("Wrote to %s\n", filename.c_str());
 }
 
-
+// writes to the file based on the array of characters 
 void writeToFile(string filename, char* arr, int sample_size) {
     ofstream file(filename);
 
@@ -52,12 +52,12 @@ void writeToFile(string filename, char* arr, int sample_size) {
     printf("Wrote to %s\n", filename.c_str());
 }
 
-
+//reads the file and prints them out to the terminal 
 void readTheFile(string filename2) {
     ifstream file(filename2); 
 
     if (!file.is_open()) { 
-        cerr << "Unable to open file " << filename2 << endl;
+        cout << "Unable to open file " << filename2 << endl;
         return;
     }
 
@@ -70,7 +70,7 @@ void readTheFile(string filename2) {
 }
 
 
-
+// Main Function of the file 
 int main() {
     string filename1 = "output_char.csv";
     string filename2 = "output_str.csv";
