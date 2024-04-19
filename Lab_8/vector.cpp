@@ -14,6 +14,7 @@ using namespace std;
 
 void printMemVec(const vector<int>& vec) {
     printf("Vector - Each int is worth %lu bytes\n", sizeof(vec[0]));
+    //sigma notation!!
     for (size_t i = 0; i < vec.size(); i++) {
         printf("Value : %i at memory location: %p\n", vec[i], (void*)(&vec[i]));
     }
