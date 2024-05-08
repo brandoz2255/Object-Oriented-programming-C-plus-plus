@@ -2,6 +2,8 @@
 #include <vector>
 #include <fstream>
 #include <ctime>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -50,7 +52,7 @@ int iterativeSearch(vector<T>& v, T elem) {
 
 
 template<typename T>
-int binarySearch(vector<T> &v, int start, int end, T elem) {
+int binarySearch(vector<T> &v, int start, int end, const T& elem) {
     if (start > end) {
         return -1; // Terminating case: element is not present in the vector
     }
@@ -98,13 +100,57 @@ int main() {
     vector<int> v;
     vecGen("10000_numbers.csv", v);
 
-    // Test elements to search for
+
+     // Example data for strings
+    vector<string> strings = {"Al", "Be", "Bea", "Bob", "Cat", "Ci"};
+    vector<string> strings_to_find = {"Bea","Bob","Al","Cat","Ci","Be"};
+
+
+    // Supposed to sort the array in case I didn't do it properly 
+    sort(strings.begin(), strings.end());
+
+    double string_binary_total_time = 0.0;
+    for (const string& str : strings_to_find) {
+        clock_t start = clock();
+        int result_index = binarySearch(strings, 0, strings.size() - 1, str);
+        clock_t end = clock();
+
+        double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
+        string_binary_total_time += elapsed_time;
+        cout << "BinarySearch - String '" << str << "' found at index: " << result_index << ", Time: " << elapsed_time << " sec" << endl;
+    }
+
+    double string_binary_avg_time = string_binary_total_time / strings_to_find.size();
+    cout << "Average time for binarySearch on strings: " << string_binary_avg_time << " sec" << endl;
+
+
+
+
+// Populate a vector with test elements to search for
+   // Test elements to search for
+
     vector<int> elem_to_find;
     vecGen("test_elem.csv", elem_to_find);
 
+    double int_binary_total_time = 0.0;
+    for (const int& elem : elem_to_find) {
+        clock_t start = clock();
+        int result_index = binarySearch(v, 0, v.size() - 1, elem);
+        clock_t end = clock();
+
+        double elapsed_time = double(end - start) / CLOCKS_PER_SEC;
+        int_binary_total_time += elapsed_time;
+        cout << "BinarySearch - Integer '" << elem << "' found at index: " << result_index << ", Time: " << elapsed_time << " sec" << endl;
+    }
+
+    double int_binary_avg_time = int_binary_total_time / elem_to_find.size();
+    cout << "Average time for binarySearch on integers: " << int_binary_avg_time << " sec" << endl;
+
+
+
     // Timing binarySearch on vector of doubles
     vector<double> d;
-    vecGen("10000_double.csv", d);  // Assume this file has sorted double values
+    vecGen("1000_double.csv", d);  // Assume this file has sorted double values
 
     vector<double> double_to_find;
     vecGen("double_to_find.csv", double_to_find);  // Assume this file has double values to find
