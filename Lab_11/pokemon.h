@@ -1,17 +1,32 @@
 #ifndef POKEMON_H
 #define POKEMON_H 
 
-class Pokemon{
-    public:
-    // constructors 
-    Pokemon();
-    Pokemon(string name, int hpm int att, int def, vector<string> type);
+#include <string>
+#include <vector>
 
-    virtual void speak();
+using namespace std;
+
+class Pokemon {
+public:
+    // Constructors
+    Pokemon();
+    Pokemon(string name, int hp, int att, int def, vector<string> type);
+    
+    // Destructor
+    virtual ~Pokemon() {}  // Virtual destructor for safe polymorphic use
+
+    // Mutator functions
+    void speak();
     virtual void printStats();
 
-    protected:
+    // Accessor functions
+    string getName() const;
+    int getHp() const;
+    int getAttack() const;
+    int getDefense() const;
+    vector<string> getType() const;
 
+protected:
     string name;
     int hp;
     int attack;
