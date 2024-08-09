@@ -16,7 +16,7 @@ public:
     virtual ~Pokemon() {}  // Virtual destructor for safe polymorphic use
 
     // Mutator functions
-    void speak();
+    virtual void speak();
     virtual void printStats();
 
     // Accessor functions
